@@ -15,6 +15,7 @@ class ReadFile extends Readable{
                 callback(err)
             } else {
                 this.fd = fd;
+                callback();
             }
         })
     }

@@ -16,7 +16,7 @@ const getResult = (flags) => {
             pipeline(
                 result,
                 write,
-                err => console.log(err)
+                err => err
             )
         })
     } else {
