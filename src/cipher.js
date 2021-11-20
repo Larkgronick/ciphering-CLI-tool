@@ -85,5 +85,6 @@ const encryptMessage = (message, config) => {
 }
 
 module.exports = {
-    encryptMessage: encryptMessage,
+    encryptMessage,
+    runCipherMachine
 }

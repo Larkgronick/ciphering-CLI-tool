@@ -1,17 +1,26 @@
 const { stderr } = process;
 const allowedConfig = ['C0', 'C1', 'R0', 'R1', 'A'];
 
+const errors = {
+    duplicate: `Command has duplicating options, please change it \n `,
+    configFlag: 'Please set correct config flag \'-c\' or \'--config\' \n',
+    configPattern: 'Config is wrong, please create a string with pattern {XY(-)}n \n',
+    inputFlag: 'Input flag is missing, please add it after config \'-i\' or \'--input\' \n: ',
+    outputFlag: 'Output flag is missing, please add it input option \'-o\'  or \'--output\' \n'
+}
+
+
 const validateFlags = (flags) => {
-    if(isDublicatedOption(flags)) {
-        stderr.write(`Command has dublicating options, please change it \n `)
+    if(isDuplicatedOption(flags)) {
+        stderr.write(errors.duplicate)
     } else if(!checkFlag(flags[0], ['-c', '--config'])) {
-        stderr.write('Please set correct config flag \'-c\' or \'--config\' \n');
+        stderr.write(errors.configFlag);
     } else if(!checkConfig(flags[1], allowedConfig)) {
-        stderr.write('Config is wrong, please create a string with pattern {XY(-)}n \n');
+        stderr.write(errors.configPattern);
     } else if(!checkFlag(flags[2], ['-i', '--input'])) {
-        stderr.write(`Input flag is missing, please add it after config \'-i\' or \'--input\' \n: `);
+        stderr.write(errors.inputFlag);
     } else if(!checkOutput(flags, ['-o', '--output'])) {
-        stderr.write(`Output flag is missing, please add it input option \'-o\'  or \'--output\' \n`);
+        stderr.write(errors.outputFlag);
     } else {
         return true;
     }
@@ -22,7 +31,7 @@ const checkFlag = (flag, type) => type.includes(flag);
 
 const checkConfig = (config, allowedConfig) => (config) ? config.split('-').every(el=> allowedConfig.includes(el)) : false;
 
-const isDublicatedOption = (flags) => {
+const isDuplicatedOption = (flags) => {
     const userFlags = flags.filter(el => el);
     return (new Set(userFlags).size !== userFlags.length);
 };
@@ -30,5 +39,11 @@ const isDublicatedOption = (flags) => {
 const checkOutput = (flags, type) => type.includes(flags[3]) || type.includes(flags[4]);
 
 module.exports = {
-    validateFlags: validateFlags
+    validateFlags,
+    isDuplicatedOption,
+    checkFlag,
+    checkConfig,
+    validateFlags,
+    allowedConfig,
+    errors
 }

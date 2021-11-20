@@ -32,5 +32,5 @@ const getResult = (flags) => {
 }
 
 module.exports = {
-    getResult: getResult,
+    getResult,
 }
