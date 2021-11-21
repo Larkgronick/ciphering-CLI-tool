@@ -49,3 +49,23 @@ $ node my_ciphering_cli -c "C1-C1-R0-A" -i "./input.txt" -o "./output.txt"
 > `Myxn xn nbdobm. Tbnnfzb ferlm "_" nhteru!`
 
 **Note**: **_input.txt_** and **_output.txt_** files supposed to be in **src** folder.
+
+**Testing:**
+
+Tests are written via [Jest](https://jestjs.io/) testing framework.
+ Before running tests you need to install it and add to your dependencies:  
+```bash
+npm install --save-dev jest
+```
+
+Tests are stored in `test` folder.
+
+For running tests execute command: 
+```bash
+npm run test
+```
+For checking coverage use this:
+```bash
+npm run coverage
+```
+
